@@ -24,10 +24,11 @@ import (
 func main() {
     t := time.Date(2018, time.January, 11, 1, 0, 0, 0, time.Local)
 
-    // Can I post a payment today for same-day ACH? 
+    // Post a payment today for same-day ACH? 
     sameDay := NewBankTime(T).IsBankDay()
     println(sameDay) // true
-    // I need to post an normal ACH payment in two banking days. 
+    
+    // Need to post an normal ACH payment in two banking days. 
     // This date has a weekend and monday holiday
     postingDate := NewBankTime(T).AddBankingDay(2)
     println(postingDate) // 2018-01-16 01:00:00 -0500 EST
