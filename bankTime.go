@@ -26,7 +26,7 @@ func NewBankTime(t time.Time) *BankTime {
 	c := cal.NewCalendar()
 	cal.AddUsHolidays(c)
 	c.Observed = cal.ObservedMonday
-	est, _ = time.LoadLocation("America/New_York")
+	est, _ := time.LoadLocation("America/New_York")
 	t = t.In(est)
 	bt := &BankTime{time: t, cal: c}
 
