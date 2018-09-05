@@ -51,6 +51,11 @@ func TestIsBankingDay(t *testing.T) {
 		if actual != test.Expected {
 			t.Errorf("Date %s: expected %t, got %t", test.Date, test.Expected, actual)
 		}
+
+		actual = New(test.Date, est).IsBankingDay()
+		if actual != test.Expected {
+			t.Errorf("Date %s: expected %t, got %t", test.Date, test.Expected, actual)
+		}
 	}
 }
 
@@ -71,6 +76,11 @@ func TestIsWeekend(t *testing.T) {
 		if actual != test.Expected {
 			t.Errorf("Date %s: expected %t, got %t", test.Date, test.Expected, actual)
 		}
+
+		actual = New(test.Date, est).IsWeekend()
+		if actual != test.Expected {
+			t.Errorf("Date %s: expected %t, got %t", test.Date, test.Expected, actual)
+		}
 	}
 }
 
@@ -85,6 +95,11 @@ func TestAddBankingDay(t *testing.T) {
 	}
 	for _, test := range tests {
 		actual := NewBankTime(test.Date).AddBankingDay(test.Days)
+		if !actual.Equal(test.Future) {
+			t.Errorf("Adding %d days: expected %s, got %s", test.Days, test.Future.Weekday().String(), actual)
+		}
+
+		actual = New(test.Date, est).AddBankingDay(test.Days)
 		if !actual.Equal(test.Future) {
 			t.Errorf("Adding %d days: expected %s, got %s", test.Days, test.Future.Weekday().String(), actual)
 		}
