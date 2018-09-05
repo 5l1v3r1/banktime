@@ -10,9 +10,15 @@ package banktime
 // https://www.frbservices.org/operations/fedwire/fedwire_hours.html
 
 import (
+	"sync"
 	"time"
 
 	"github.com/rickar/cal"
+)
+
+var (
+	DefaultLocation *time.Location
+	setup sync.Once
 )
 
 // BankTime takes a time.Time with accessors for US bank Holidays and banking days.
@@ -21,19 +27,36 @@ type BankTime struct {
 	cal  *cal.Calendar
 }
 
-// NewBankTime creates a new BankDate with an instantiated calendar
-func NewBankTime(t time.Time) *BankTime {
+// New returns a BankTime for an optional *time.Location
+// If no *time.Location is provided then America/New_York is used.
+func New(t time.Time, loc *time.Location) *BankTime {
 	c := cal.NewCalendar()
 	cal.AddUsHolidays(c)
 	c.Observed = cal.ObservedMonday
-	est, _ := time.LoadLocation("America/New_York")
-	t = t.In(est)
-	bt := &BankTime{time: t, cal: c}
 
-	return bt
+	if loc == nil {
+		setup.Do(func() {
+			loc, _ = time.LoadLocation("America/New_York")
+			DefaultLocation = loc
+		})
+		t = t.In(DefaultLocation)
+	} else {
+		t = t.In(loc)
+	}
+
+	return &BankTime{
+		time: t,
+		cal: c,
+	}
+}
+// NewBankTime creates a new BankTime with an instantiated calendar
+// in America/New_York.
+func NewBankTime(t time.Time) *BankTime {
+	return New(t, nil)
 }
 
-// IsBankingDay returns true if the day is a banking day, false otherwise
+// IsBankingDay checks the rules around holidays (i.e. weekends) to
+// determine if the given day is a banking day.
 func (bt *BankTime) IsBankingDay() bool {
 	// if date is not a weekend and not a holiday it is banking day.
 	if bt.IsWeekend() {
