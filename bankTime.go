@@ -18,7 +18,7 @@ import (
 
 var (
 	DefaultLocation *time.Location
-	setup sync.Once
+	setup           sync.Once
 )
 
 // BankTime takes a time.Time with accessors for US bank Holidays and banking days.
@@ -46,9 +46,10 @@ func New(t time.Time, loc *time.Location) *BankTime {
 
 	return &BankTime{
 		time: t,
-		cal: c,
+		cal:  c,
 	}
 }
+
 // NewBankTime creates a new BankTime with an instantiated calendar
 // in America/New_York.
 func NewBankTime(t time.Time) *BankTime {
