@@ -17,6 +17,8 @@ import (
 )
 
 var (
+	// DefaultLocation is the *time.Location used when creating a BankTime instance.
+	// By default America/New_York is populated here.
 	DefaultLocation *time.Location
 	setup           sync.Once
 )
