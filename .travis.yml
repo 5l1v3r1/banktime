@@ -1,20 +1,25 @@
-language: go
 sudo: false
+language: go
 os:
-- linux
-- osx
+  - linux
+  - osx
 go:
-- 1.11
+  - 1.11
 osx_image: xcode9.1
 before_install:
-- go get -u github.com/client9/misspell/cmd/misspell
-- go get -u golang.org/x/lint/golint
-- go get github.com/fzipp/gocyclo
+  - go get -u github.com/client9/misspell/cmd/misspell
+  - go get -u golang.org/x/lint/golint
+  - go get github.com/fzipp/gocyclo
+  - go get golang.org/x/tools/cmd/cover
 before_script:
-- GOFILES=$(find . -type f -name '*.go' | grep -v vendor)
+  - GOFILES=$(find . -type f -name '*.go' | grep -v vendor)
 script:
-- test -z $(gofmt -s -l $GOFILES)
-- go test ./...
-- misspell -error -locale US $GOFILES
-- gocyclo -over 19 $GOFILES
-- golint -set_exit_status $GOFILES
+  - test -z $(gofmt -s -l $GOFILES)
+  - go test ./... -race -coverprofile=coverage.txt -covermode=atomic
+  - misspell -error -locale US $GOFILES
+  - gocyclo -over 19 $GOFILES
+  - golint -set_exit_status $GOFILES
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
+notifications:
+  email: false
