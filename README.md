@@ -12,13 +12,13 @@ A golang library for working with US Federal Reserve Banks days of payment proce
 - If a holiday falls on a sunday the following monday is an observed holiday
 - Add banking days skips holidays, weekends, and observed days
 
-Project is based on the excellent calendar library by @rickar
+Project is based on the excellent calendar library by [@rickar](https://github.com/rickar).
 
 ```text
-go get "github.com/rickar/cal"
+$ go get "github.com/rickar/cal"
 ```
 
-Some example use cases
+Some example use cases:
 
 ```go
 package main
@@ -46,7 +46,6 @@ func main() {
 
  channel | info
  ------- | -------
- [Project Documentation](https://docs.moov.io/en/latest/) | Our project documentation available online.
  Google Group [moov-users](https://groups.google.com/forum/#!forum/moov-users)| The Moov users Google group is for contributors other people contributing to the Moov project. You can join them without a google account by sending an email to [moov-users+subscribe@googlegroups.com](mailto:moov-users+subscribe@googlegroups.com). After receiving the join-request message, you can simply reply to that to confirm the subscription.
 Twitter [@moov_io](https://twitter.com/moov_io)	| You can follow Moov.IO's Twitter feed to get updates on our project(s). You can also tweet us questions or just share blogs or stories.
 [GitHub Issue](https://github.com/moov-io) | If you are able to reproduce an problem please open a GitHub Issue under the specific project that caused the error.
