@@ -15,7 +15,8 @@ A golang library for working with US Federal Reserve Banks days of payment proce
 Project is based on the excellent calendar library by [@rickar](https://github.com/rickar).
 
 ```text
-$ go get "github.com/rickar/cal"
+$ go get -u github.com/rickar/cal
+$ go get -u github.com/moov-io/banktime
 ```
 
 Some example use cases:
