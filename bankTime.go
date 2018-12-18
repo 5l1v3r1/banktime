@@ -1,6 +1,8 @@
-package banktime
+// Copyright 2018 The Moov Authors
+// Use of this source code is governed by an Apache License
+// license that can be found in the LICENSE file.
 
-// BankTime assists in calculating processing days that meet the US Federal Reserve Banks processing days.
+// Package banktime assists in calculating processing days that meet the US Federal Reserve Banks processing days.
 //
 // For holidays falling on Saturday, Federal Reserve Banks and Branches will be open the preceding Friday.
 // For holidays falling on Sunday, all Federal Reserve Banks and Branches will be closed the following Monday.
@@ -8,6 +10,7 @@ package banktime
 // https://www.frbservices.org/holidayschedules/
 // All logic is based on ET(Eastern) time as defined by the Federal Reserve
 // https://www.frbservices.org/operations/fedwire/fedwire_hours.html
+package banktime
 
 import (
 	"sync"
