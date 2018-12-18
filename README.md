@@ -6,6 +6,8 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/moov-io/banktime)](https://goreportcard.com/report/github.com/moov-io/banktime)
 [![Apache 2 licensed](https://img.shields.io/badge/license-Apache2-blue.svg)](https://raw.githubusercontent.com/moov-io/banktime/master/LICENSE)
 
+**NOTE**: This project has been merged into [`github.com/moov-io/base`](https://github.com/moov-io/base). Please refer to the methods in [`Time`](https://godoc.org/github.com/moov-io/base#Time) in that package for the same functionality.
+
 A golang library for working with US Federal Reserve Banks days of payment processing
 
 - All times will be converted to Eastern Time (America/New_York)
